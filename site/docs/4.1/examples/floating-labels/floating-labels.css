@@ -89,6 +89,7 @@ body {
   .form-label-group > label {
     display: none;
   }
+
   .form-label-group input::-ms-input-placeholder {
     color: #777;
   }
@@ -100,6 +101,7 @@ body {
   .form-label-group > label {
     display: none;
   }
+
   .form-label-group input:-ms-input-placeholder {
     color: #777;
   }
