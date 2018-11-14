@@ -3,7 +3,12 @@
   <head>
     {% include header.html %}
   </head>
-  <body>
+
+  {% capture body_class -%}
+  layout-{{ page.layout }}{% if page.body_class %} page-{{ page.body_class }}{% elsif page.slug %} page-{{ page.slug | slugify }}{% endif %}
+  {%- endcapture -%}
+
+  <body class="{{ body_class }}">
     {% include skippy.html %}
 
     {% include docs-navbar.html %}
