@@ -32,9 +32,18 @@ optional: hide_markup - disabled (default)
         {%- assign image_class = image_class[1] | strip -%}
       {%- endif -%}
 
+      {%- assign image_alt = include.content
+        | replace: '%">', '%">✂️'
+        | replace: '</text', '✂️</text'
+        | split: '✂️' -%}
+      {%- assign image_alt = image_alt[1] | strip -%}
+
       {%- for content_chunk in modified_content -%}
         {%- if content_chunk contains '<svg class="bd-placeholder-img' -%}
-          {{- '<img src="..." class="' | append: image_class | append: '" alt="...">' -}}
+          {%- capture img_placeholder -%}
+            <img src="..." {% if image_class %}class="{{ image_class }}" {% endif %}alt="{{ image_alt }}">
+          {%- endcapture -%}
+          {{- img_placeholder -}}
         {%- else -%}
           {{- content_chunk -}}
         {%- endif -%}
