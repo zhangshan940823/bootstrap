@@ -1,21 +1,27 @@
 {%- assign width = include.width | default: '100%' -%}
 {%- assign height = include.height | default: '180' -%}
+
 {%- if include.text -%}
   {%- assign text = include.text -%}
 {%- else -%}
   {%- assign text = width | append: 'x' | append: height -%}
 {%- endif -%}
+
+{%- assign title = include.title | default: 'Generic Placeholder Image' -%}
+
 {%- if include.class -%}
   {% assign class = include.class | prepend: ' ' %}
 {%- endif -%}
+
 {%- assign color = include.color | default: '#ddd' -%}
 {%- assign background = include.background | default: '#777' -%}
 
 {%- capture svg -%}
 <svg class="bd-placeholder-img{{ class }}" width="{{ width }}" height="{{ height }}" xmlns="http://www.w3.org/2000/svg"{% if include.viewBox %} viewBox="{{ include.viewBox }}"{% endif %} preserveAspectRatio="xMidYMid slice">
-  {% if include.title %}<title>{{ include.title }}</title>{% endif %}
+  {% if title != ' ' %}<title>{{ title }}</title>{% endif %}
   <rect fill="{{ background }}" width="100%" height="100%"/>
   <text fill="{{ color }}" dy=".3em" x="50%" y="50%">{{ text }}</text>
 </svg>
 {%- endcapture -%}
+
 {{- svg | replace: '  ', '' | strip_newlines -}}
